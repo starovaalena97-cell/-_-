@@ -2,7 +2,7 @@
 Модуль для обработки данных транзакций: фильтрация и сортировка.
 """
 
-from typing import Any, Dict, List
+from typing import List, Dict, Any
 
 
 def filter_by_state(
@@ -18,9 +18,11 @@ def filter_by_state(
     Returns:
         Новый список транзакций с указанным статусом
     """
-    return [
-        transaction for transaction in transactions if transaction.get("state") == state
-    ]
+    result = []
+    for transaction in transactions:
+        if transaction.get("state") == state:
+            result.append(transaction)
+    return result
 
 
 def sort_by_date(

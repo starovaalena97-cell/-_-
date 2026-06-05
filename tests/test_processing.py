@@ -3,7 +3,6 @@
 """
 
 import pytest
-
 from src.processing import filter_by_state, sort_by_date
 
 
@@ -29,21 +28,31 @@ def transactions_same_dates():
     ]
 
 
-@pytest.mark.parametrize(
-    "state, expected_count",
-    [
-        ("EXECUTED", 2),
-        ("CANCELED", 2),
-        ("PENDING", 1),
-        ("NONEXISTENT", 0),
-    ],
-)
-def test_filter_by_state_parametrized(sample_transactions, state, expected_count):
-    """Параметризованный тест фильтрации по статусу."""
-    result = filter_by_state(sample_transactions, state)
-    assert len(result) == expected_count
-    if expected_count > 0:
-        assert all(t["state"] == state for t in result)
+def test_filter_by_state_executed(sample_transactions):
+    """Тест фильтрации по статусу EXECUTED."""
+    result = filter_by_state(sample_transactions, "EXECUTED")
+    assert len(result) == 2
+    assert all(t["state"] == "EXECUTED" for t in result)
+
+
+def test_filter_by_state_canceled(sample_transactions):
+    """Тест фильтрации по статусу CANCELED."""
+    result = filter_by_state(sample_transactions, "CANCELED")
+    assert len(result) == 2
+    assert all(t["state"] == "CANCELED" for t in result)
+
+
+def test_filter_by_state_pending(sample_transactions):
+    """Тест фильтрации по статусу PENDING."""
+    result = filter_by_state(sample_transactions, "PENDING")
+    assert len(result) == 1
+    assert all(t["state"] == "PENDING" for t in result)
+
+
+def test_filter_by_state_nonexistent(sample_transactions):
+    """Тест фильтрации по несуществующему статусу."""
+    result = filter_by_state(sample_transactions, "NONEXISTENT")
+    assert len(result) == 0
 
 
 def test_filter_by_state_default(sample_transactions):
