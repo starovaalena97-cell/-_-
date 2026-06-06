@@ -7,28 +7,6 @@ import pytest
 from src.processing import filter_by_state, sort_by_date
 
 
-@pytest.fixture
-def sample_transactions():
-    """Фикстура с тестовыми транзакциями."""
-    return [
-        {"id": 1, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"},
-        {"id": 2, "state": "CANCELED", "date": "2018-10-14T08:21:33.419441"},
-        {"id": 3, "state": "EXECUTED", "date": "2018-06-30T02:08:58.425572"},
-        {"id": 4, "state": "CANCELED", "date": "2018-09-12T21:27:25.241689"},
-        {"id": 5, "state": "PENDING", "date": "2020-01-01T00:00:00"},
-    ]
-
-
-@pytest.fixture
-def transactions_same_dates():
-    """Фикстура с транзакциями, имеющими одинаковые даты."""
-    return [
-        {"id": 1, "state": "EXECUTED", "date": "2024-01-01T00:00:00"},
-        {"id": 2, "state": "CANCELED", "date": "2024-01-01T00:00:00"},
-        {"id": 3, "state": "EXECUTED", "date": "2024-01-01T00:00:00"},
-    ]
-
-
 def test_filter_by_state_executed(sample_transactions):
     """Тест фильтрации по статусу EXECUTED."""
     result = filter_by_state(sample_transactions, "EXECUTED")
