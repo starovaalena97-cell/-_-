@@ -22,3 +22,10 @@ htmlcov/
 
 # Poetry
 poetry.lock
+
+# Переменные окружения
+.env
+
+# Файлы с секретами
+*.env
+!.env.example
