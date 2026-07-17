@@ -11,7 +11,7 @@ load_dotenv()
 
 # API ключ из .env
 API_KEY = os.getenv('EXCHANGE_RATE_API_KEY')
-BASE_URL = 'http://api.exchangeratesapi.io/v1/latest'
+BASE_URL = 'https://api.apilayer.com/exchangerates_data/convert'
 
 
 def get_exchange_rate(from_currency: str, to_currency: str = 'RUB'):
@@ -28,20 +28,25 @@ def get_exchange_rate(from_currency: str, to_currency: str = 'RUB'):
     if not API_KEY:
         return None
 
+    # Для API apilayer.com параметры передаются как query-параметры
     params = {
-        'access_key': API_KEY,
-        'base': from_currency,
-        'symbols': to_currency
+        'from': from_currency,
+        'to': to_currency,
+        'amount': 1
+    }
+
+    headers = {
+        'apikey': API_KEY
     }
 
     try:
-        response = requests.get(BASE_URL, params=params, timeout=10)
+        response = requests.get(BASE_URL, params=params, headers=headers, timeout=10)
         response.raise_for_status()
         data = response.json()
 
+        # У apilayer.com ответ приходит с полем 'result'
         if data.get('success'):
-            rates = data.get('rates', {})
-            return rates.get(to_currency)
+            return data.get('result')
         return None
 
     except Exception:

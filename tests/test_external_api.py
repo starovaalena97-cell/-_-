@@ -14,9 +14,10 @@ class TestGetExchangeRate:
     def test_successful_request(self, mock_get):
         """Тест успешного запроса к API."""
         mock_response = Mock()
+        # Исправленный mock-ответ под новый API
         mock_response.json.return_value = {
             'success': True,
-            'rates': {'RUB': 92.50}
+            'result': 92.50  # вместо 'rates': {'RUB': 92.50}
         }
         mock_response.raise_for_status = Mock()
         mock_get.return_value = mock_response
@@ -32,8 +33,7 @@ class TestGetExchangeRate:
         rate = get_exchange_rate('USD')
         assert rate is None
 
-    @patch('src.external_api.requests.get')
-    def test_no_api_key(self, mock_get):
+    def test_no_api_key(self):
         """Тест без API ключа."""
         with patch('src.external_api.API_KEY', None):
             rate = get_exchange_rate('USD')
