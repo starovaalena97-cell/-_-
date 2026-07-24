@@ -1,0 +1,2 @@
+2026-07-24 13:44:58 - src.utils - DEBUG - Попытка открыть файл: data/operations.json
+2026-07-24 13:44:58 - src.utils - INFO - Файл успешно прочитан: data/operations.json, количество записей: 101
