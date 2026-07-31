@@ -35,7 +35,10 @@ class TestConvertToRubles:
 
     def test_convert_usd_to_rub(self):
         transaction = {
-            'operationAmount': {'amount': '100.00', 'currency': {'code': 'USD'}}
+            'operationAmount': {
+                'amount': '100.00',
+                'currency': {'code': 'USD'}
+            }
         }
         with patch('src.external_api.get_exchange_rate', return_value=92.50):
             result = convert_to_rubles(transaction)
@@ -43,7 +46,10 @@ class TestConvertToRubles:
 
     def test_convert_eur_to_rub(self):
         transaction = {
-            'operationAmount': {'amount': '50.00', 'currency': {'code': 'EUR'}}
+            'operationAmount': {
+                'amount': '50.00',
+                'currency': {'code': 'EUR'}
+            }
         }
         with patch('src.external_api.get_exchange_rate', return_value=101.20):
             result = convert_to_rubles(transaction)
@@ -51,14 +57,20 @@ class TestConvertToRubles:
 
     def test_already_rub(self):
         transaction = {
-            'operationAmount': {'amount': '5000.00', 'currency': {'code': 'RUB'}}
+            'operationAmount': {
+                'amount': '5000.00',
+                'currency': {'code': 'RUB'}
+            }
         }
         result = convert_to_rubles(transaction)
         assert result == 5000.00
 
     def test_api_failure(self):
         transaction = {
-            'operationAmount': {'amount': '100.00', 'currency': {'code': 'USD'}}
+            'operationAmount': {
+                'amount': '100.00',
+                'currency': {'code': 'USD'}
+            }
         }
         with patch('src.external_api.get_exchange_rate', return_value=None):
             result = convert_to_rubles(transaction)

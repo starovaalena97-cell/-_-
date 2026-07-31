@@ -12,7 +12,9 @@ class TestReadJsonFile:
 
     def test_read_valid_json(self):
         mock_data = [{"id": 1, "description": "Test"}]
-        with patch('builtins.open', mock_open(read_data=json.dumps(mock_data))):
+        with patch(
+                'builtins.open', mock_open(read_data=json.dumps(mock_data))
+        ):
             with patch('os.path.exists', return_value=True):
                 result = read_json_file('test.json')
                 assert result == mock_data
