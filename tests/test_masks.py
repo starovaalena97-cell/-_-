@@ -12,12 +12,12 @@ def test_get_mask_card_number():
 
 def test_get_mask_card_number_invalid_length():
     """Тестирует номер карты неправильной длины."""
-    assert get_mask_card_number("1234") == "1234"
+    assert get_mask_card_number("1234") == "Неверный номер карты"
 
 
 def test_get_mask_card_number_with_letters():
     """Тестирует номер карты с буквами."""
-    assert get_mask_card_number("700079228960636a") == "700079228960636a"
+    assert get_mask_card_number("700079228960636a") == "Неверный номер карты"
 
 
 def test_get_mask_account():
@@ -27,7 +27,7 @@ def test_get_mask_account():
 
 def test_get_mask_account_short():
     """Тестирует короткий номер счета."""
-    assert get_mask_account("123") == "123"
+    assert get_mask_account("123") == "Неверный номер счёта"
 
 
 def test_get_mask_account_four_digits():

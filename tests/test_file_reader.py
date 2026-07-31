@@ -2,7 +2,8 @@
 Тесты для модуля file_reader.
 """
 
-from unittest.mock import patch, Mock
+from unittest.mock import Mock, patch
+
 from src.file_reader import read_csv_transactions, read_excel_transactions
 
 

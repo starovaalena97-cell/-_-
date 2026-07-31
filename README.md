@@ -55,3 +55,14 @@ transactions_excel = read_excel_transactions('data/transactions_excel.xlsx')
 
 print(f"CSV: {len(transactions_csv)} записей")
 print(f"Excel: {len(transactions_excel)} записей")
+
+## Поиск и подсчёт операций
+
+Модуль `search_utils` предоставляет:
+
+- `search_transactions(transactions, search_string)` — поиск транзакций по описанию (регистронезависимо)
+- `count_operations_by_category(transactions, categories)` — подсчёт операций по категориям
+
+## Интерфейс командной строки
+
+Запустите `src/main.py`, чтобы взаимодействовать с программой через консоль.
