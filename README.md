@@ -66,3 +66,18 @@ print(f"Excel: {len(transactions_excel)} записей")
 ## Интерфейс командной строки
 
 Запустите `src/main.py`, чтобы взаимодействовать с программой через консоль.
+
+##  Поиск и подсчёт операций
+
+Модуль `search_utils` предоставляет функции для анализа транзакций.
+
+###  Функции:
+
+#### `search_transactions(transactions, search_string)`
+Ищет транзакции, в описании которых встречается заданная строка (регистронезависимо).
+
+**Пример:**
+```python
+from src.search_utils import search_transactions
+
+result = search_transactions(transactions, 'перевод')
